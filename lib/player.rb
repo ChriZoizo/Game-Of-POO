@@ -1,10 +1,11 @@
-
 class Player                                          # creation de classe Player (CPU)
-  attr_accessor :name, :life_points
+  attr_accessor :name, :life_points :p_name
   def initialize(name)                                # Methode qui definis les caracteristiques des objets Player  
-    @name = name.to_s
+    $name_cpu = ["prout", "pouet", "Francise", "Macron", "Superman", "Guts", "Florian", "Ugo", "Killian", "Johnathan", "David", "Jean-Marc", "Guillemette XD", "Sindy", "Moncul", "Sur la Commode", "Fhelix le mou", "Rose", "Jiiha", "Robert"]
+    @name = $name_cpu.sample                          # L'array sert de reserve de noms pour les I.A.
     @life_points = 10
   end
+
 
   def show_state                                      # pour montrer l'etats d'un Player_CPU / Joueurs
     puts "#{name} a #{@life_points} PV"
@@ -55,37 +56,41 @@ class Player                                          # creation de classe Playe
     target.get_damage(damage)
   end
  
-  def compute_damage
-      return rand(1..6)
+  def compute_damage                                  # methode pour laculer la valeur des degats
+      
+    return rand(1..6)
   end
 end
 
+def cpu_name
+  $name_cpu = ["prout", "pouet", "Francise", "Macron", "Superman", "Guts", "Florian", "Ugo", "Killian", "Johnathan", "David", "Jean-Marc", "Guillemette XD", "Sindy", "Moncul", "Sur la Commode", "Fhelix le mou", "Rose", "Jiiha", "Robert"]
+$cpu_name = $name_cpu.sample
+end
 
-class HumanPlayer < Player
-  attr_accessor :weapon_level
-  def initialize(name)
+
+class HumanPlayer < Player                           #Creation de la Class HumanPlayer pour le joueur
+  attr_accessor :weapon_level                        
+  def initialize(p_name)                               
     super(name)
     @life_points = 100
-    @weapon_level = 1
+    @weapon_level = 0
   end
 
-  def show_state
+  def show_state                                    # Affiche le status e status du joueurs
     p "#{name} a #{@life_points} PV et un arme Level #{weapon_level}"
   end
 
-  def compute_damage 
-    rand(1..6) * @weapon_level
+  def compute_damage                                # Calcule les degats pour le joueur. avec coefficient multiplicateur
+    rand(1..6) * @weapon_level                      # qui correspond au resultat de la methode search_weapon
   end
 
-  def search_weapon
-    @weapon_find = rand(1..6)
+  def search_weapon                                 # Methode pour le cas ou le joueur
+    @weapon_find = rand(1..6)                       # calcule de lu niveau de l'arme trouver
     puts "Tu as trouvé un arme de niveau #{@weapon_find} !"
      print "..."
      l = gets.chomp
-    if @weapon_find > @weapon_level 
-      @weapon_level += @weapon_find*
-    if @weapon_level = 7
-      @weapon_level = 6
+    if @weapon_find > @weapon_level                 # condition pour le cas ou l'arme est moin puissant que l'arme actuelle
+      @weapon_level += @weapon_find
     else 
       puts "#tristesse ! elle n'est pas mieux quel ton arme actuel !"
       print "..."
@@ -93,34 +98,35 @@ class HumanPlayer < Player
     end
     end
 
-  def search_health_pack
-    medipack = rand(1..6)
-    case medipack
-    when 1
+  def search_health_pack                            # methode pour chercher un kit de soin
+    medipack = rand(1..6)                           # valeur du kit de soin
+    case medipack                                   
+    when 1                                          # le cas ou le jet de des donne 1
       puts " tu n'as rien trouvé :'( fout le camp !"
       print "..."
       l = gets.chomp
-    when 2..5
-          puts "Bravo ! tu as recuperé un medipack (50PV)"
-          if @life_points <50
+    when 2..5                                       # Cas ou le joueur trouve un medipack de 50
+          puts "Bravo ! tu as recuperé un medipack (50PV)"    
+          if @life_points <50                       # Application du soin
            @life_points+=50
           else 
             @life_points = 100
           end
           print "..."
           l = gets.chomp
-          when 6
+          when 6                                    # cas ou le joueur trouve un medipack de 80
             puts "Bravo ! t'es content ? t'as recuperé un grand medipack (80PV)"
-            if @life_points < 20 
+            if @life_points < 20                    # Application du soin                             
               @life_points +=80
             else 
               @life_points = 100
             end
-print "..."
+print "..."                                         # temporisation
 l = gets.chomp
  
       end
     end
   end
-end
+
+
 

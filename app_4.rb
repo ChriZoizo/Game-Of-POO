@@ -1,5 +1,4 @@
 require 'bundler'
-require 'pry'
 require 'spinning_cursor'
 Bundler.require
 
