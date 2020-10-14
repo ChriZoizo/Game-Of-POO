@@ -69,14 +69,14 @@ def menu
   i +=1 
   puts "#=>#{i} #{cpu.name}"
   puts cpu.show_state
-  #   puts "#=> 1 #{@player1.name}"
-  # puts @player1.show_state
-  # puts "#=> 2 #{@player2.name}"
-  # puts @player2.show_state
-  # puts "#=> 3 #{@player3.name}"
-  # puts @player3.show_state
-  # puts "#=> 4 #{@player4.name}"
-  # puts @player4.show_state
+    puts "#=> 1 #{@player1.name}"
+  puts @player1.show_state
+  puts "#=> 2 #{@player2.name}"
+  puts @player2.show_state
+  puts "#=> 3 #{@player3.name}"
+  puts @player3.show_state
+  puts "#=> 4 #{@player4.name}"
+  puts @player4.show_state
   end
 end
 

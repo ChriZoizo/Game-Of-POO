@@ -1,5 +1,5 @@
 class Player                                          # creation de classe Player (CPU)
-  attr_accessor :name, :life_points :p_name
+  attr_accessor :name, :life_points
   def initialize(name)                                # Methode qui definis les caracteristiques des objets Player  
     $name_cpu = ["prout", "pouet", "Francise", "Macron", "Superman", "Guts", "Florian", "Ugo", "Killian", "Johnathan", "David", "Jean-Marc", "Guillemette XD", "Sindy", "Moncul", "Sur la Commode", "Fhelix le mou", "Rose", "Jiiha", "Robert"]
     @name = $name_cpu.sample                          # L'array sert de reserve de noms pour les I.A.
@@ -69,11 +69,12 @@ end
 
 
 class HumanPlayer < Player                           #Creation de la Class HumanPlayer pour le joueur
-  attr_accessor :weapon_level                        
-  def initialize(p_name)                               
+  attr_accessor :weapon_level  
+          
+  def initialize(name)                                 
     super(name)
     @life_points = 100
-    @weapon_level = 0
+    @weapon_level = 1 
   end
 
   def show_state                                    # Affiche le status e status du joueurs
@@ -81,17 +82,18 @@ class HumanPlayer < Player                           #Creation de la Class Human
   end
 
   def compute_damage                                # Calcule les degats pour le joueur. avec coefficient multiplicateur
-    rand(1..6) * @weapon_level                      # qui correspond au resultat de la methode search_weapon
+    rand(1..5) * @weapon_level                      # qui correspond au resultat de la methode search_weapon
   end
 
   def search_weapon                                 # Methode pour le cas ou le joueur
-    @weapon_find = rand(1..6)                       # calcule de lu niveau de l'arme trouver
-    puts "Tu as trouvé un arme de niveau #{@weapon_find} !"
-     print "..."
-     l = gets.chomp
-    if @weapon_find > @weapon_level                 # condition pour le cas ou l'arme est moin puissant que l'arme actuelle
+    @weapon_find = rand(1..6)                      # calcule de lu niveau de l'arme trouver
+      if @weapon_find > @weapon_level
+        puts "Tu as trouvé un arme de niveau #{@weapon_find} !"
+        print "..."
+        l = gets.chomp
+                 
       @weapon_level += @weapon_find
-    else 
+    else                                            # condition pour le cas ou l'arme est moin puissant que l'arme actuelle
       puts "#tristesse ! elle n'est pas mieux quel ton arme actuel !"
       print "..."
       l = gets.chomp

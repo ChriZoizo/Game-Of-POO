@@ -12,7 +12,7 @@ SpinningCursor.run do                                                       # Cu
   banner "LOADING..."                                                       #fonctionne grace a une gem
   type :spinner
   action do
-  sleep 5
+  sleep 3
 end
   message "LOADED !"                                                          # Chargement terminé
 end                                                                         # Ecran titre                             
@@ -25,8 +25,8 @@ l = gets.chomp
 end
 
 def start_to_play                                                          # Methode qui va lencer le jeu
-  player1 = Player.new(@name)                                         #creation nouveaux objets Player
-  player2 = Player.new(@name)
+  player1 = Player.new($name)                                         #creation nouveaux objets Player
+  player2 = Player.new($name)
     while player1.life_points > 0 && player2.life_points > 0              # Tant que les Players ont des PV, la partie continue
       puts ""                                                           
       puts "<3<3<3    Voici l'etat de chaque joueurs    <3<3<3"
@@ -80,7 +80,19 @@ def start_to_play                                                          # Met
 
       player2.attacks(player1)                                              # Player 2 attaque Player 1
     if player1.life_points <= 0                                             # Si P1 n'a plus de PV, la partie est fini
-        puts " Fin de partie"                                           
+puts "┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
+      ███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀
+      ██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼█┼┼┼██┼██┼┼┼
+      ██┼┼┼▄▄▄┼██▄▄▄▄▄██┼██┼┼┼▀┼┼┼██┼██▀▀▀
+      ██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██┼┼┼
+      ███▄▄▄██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██▄▄▄
+      ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
+      ███▀▀▀███┼▀███┼┼██▀┼██▀▀▀┼██▀▀▀▀██▄┼
+      ██┼┼┼┼┼██┼┼┼██┼┼██┼┼██┼┼┼┼██┼┼┼┼┼██┼
+      ██┼┼┼┼┼██┼┼┼██┼┼██┼┼██▀▀▀┼██▄▄▄▄▄▀▀┼
+      ██┼┼┼┼┼██┼┼┼██┼┼█▀┼┼██┼┼┼┼██┼┼┼┼┼██┼
+      ███▄▄▄███┼┼┼─▀█▀┼┼─┼██▄▄▄┼██┼┼┼┼┼██▄
+      "                                           
       break
     else                                                                    # Sinon ça continue
       player1.attacks(player2)

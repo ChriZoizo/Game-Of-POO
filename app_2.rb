@@ -2,7 +2,7 @@ require 'bundler'
 require 'pry'
 Bundler.require
 
-#require_relative 'lib/game'
+require_relative 'lib/game'
 require_relative 'lib/player'
 
 def landing
@@ -40,15 +40,15 @@ puts ""
           banner "LOADING..."
           type :spinner
           action do
-          sleep 5
+          sleep 3
   end
           message "LOADED !"
   end
 
-  puts "Bonjour a toi mecreant !! Quel est ton nom ? (ducon)"
+  puts "Bonjour a toi mecreant !! Quel est ton nom ?"
   print ">"
-  player_name = gets.chomp.to_s
-  human = HumanPlayer.new(player_name)
+  $name = gets.chomp.to_s
+  human = HumanPlayer.new($name)
 
   @arr_player = []
   @arr_player << player1 = Player.new($name)
@@ -64,6 +64,7 @@ puts ""
     puts "<3<3<3        Voici ton etats         <3<3<3"
     puts ""
     human.show_state
+    puts ""
     puts "Quelle action veux-tu effectuer ?"
     puts ""
     puts "a - chercher de quoi leurs cassé la bouche"
