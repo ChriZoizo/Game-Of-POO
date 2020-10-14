@@ -5,7 +5,7 @@ Bundler.require
 require_relative 'lib/game'
 require_relative 'lib/player'
 
-def landing
+def landing                 # le launcher
   puts "                        ________
   |__   __/    _   _   _   _   _   _ __    _____  ____
   ___ | | | | | | | | | | | | | | | || |  |  __/ | || |  _
@@ -35,27 +35,26 @@ puts ""
 puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  PRESS 'ENTER' TO PLAY  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 puts "=============================================> START? <==============================================="
 puts ""
-         ok = gets.chomp  
-         SpinningCursor.run do
+         ok = gets.chomp                      
+         SpinningCursor.run do                # Curseur animées
           banner "LOADING..."
           type :spinner
           action do
-          sleep 3
+          sleep 1
   end
           message "LOADED !"
   end
 
-  puts "Bonjour a toi mecreant !! Quel est ton nom ?"
+  puts "Bonjour a toi mecreant !! Quel est ton nom ?"   # entrée du nom du joueur
   print ">"
   $name = gets.chomp.to_s
   human = HumanPlayer.new($name)
 
-  @arr_player = []
-  @arr_player << player1 = Player.new($name)
-  @arr_player << player2 = Player.new($name)
-
-  while human.life_points > 0 
-    puts ""
+  @arr_player = []                                      #creation ennemis
+  @arr_player << player1 = Player.new("Prout")
+  @arr_player << player2 = Player.new("Pouet")
+    while (player1.life_points > 0 || player2.life_points > 0) && human.life_points >0
+    puts ""                                                                       # deroulement partie
     puts "<3<3<3    Voici l'etat des ennemis    <3<3<3"
     puts ""
     player1.show_state
@@ -71,7 +70,7 @@ puts ""
     puts "s - chercher à se soigner (pas sur que tu trouve ^^)"
     puts ""
     puts "attaquer un joueur en vue :"
-    if player1.life_points > 0
+    if player1.life_points > 0                                        # affichage des etats des joueurs
       puts "=~> 0"
       puts player1.show_state
     end
@@ -79,12 +78,11 @@ puts ""
       puts "=~> 1"
       puts player2.show_state
     end
-
       puts ""
       puts "------------------------------------------------------------------------------------------------------"
       print ">>>>>>>>>>>>> Choisissez une action <<<<<<<<<<<<<"
-      puts ""
-        case gets.chomp
+      puts "" 
+        case gets.chomp                                           # menu
           when "a"
            human.search_weapon
           when "s"
@@ -97,17 +95,20 @@ puts ""
             puts "t'as rien compris, tu perd un tour, et tu prend des degats !"
         end
       puts ""
-        if @arr_player.count > 0
+        if player1.life_points > 0 || player2.life_points > 0
           puts "A ton tour d'en prendre plein la poire ! "
           print "..."
           gets.chomp
-          @arr_player.each do |enemy| # Les ennemis attaquent l'utilisateur chacun leur tour tant qu'il est en vie, sinon un message annonce sa mort
-        if enemy.life_points > 0
-           enemy.attacks(human)
+        end
+        if player1.life_points >= 1                     # attaque des Players
+           player1.attacks(human)
+        end
+        if player2.life_points >= 1
+          player2.attacks(human)
         end
       end
-          if human.life_points <= 0
-puts "                ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
+        if human.life_points == 0
+puts "                ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼                      # Affichage du game over
                     ███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀
                     ██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼█┼┼┼██┼██┼┼┼
                     ██┼┼┼▄▄▄┼██▄▄▄▄▄██┼██┼┼┼▀┼┼┼██┼██▀▀▀
@@ -120,9 +121,8 @@ puts "                ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼�
                     ██┼┼┼┼┼██┼┼┼██┼┼█▀┼┼██┼┼┼┼██┼┼┼┼┼██┼
                     ███▄▄▄███┼┼┼─▀█▀┼┼─┼██▄▄▄┼██┼┼┼┼┼██▄
     "
-        break
-      end
-      if @arr_player == 0
+    end
+      if player1.life_points <= 0 && player2.life_points <= 0                       # affichage de la fin en cas de Win
 puts  " OOOO
 OOOOOOOOO
 OOOOOOOOOOOO
@@ -151,13 +151,8 @@ OOOOOOOOOOOOOO
 "
       end
     end
-  end
-
-
-end
-
- 
-
+  
+    
 
 
 landing

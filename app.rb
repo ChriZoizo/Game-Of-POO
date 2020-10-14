@@ -25,8 +25,8 @@ l = gets.chomp
 end
 
 def start_to_play                                                          # Methode qui va lencer le jeu
-  player1 = Player.new($name)                                         #creation nouveaux objets Player
-  player2 = Player.new($name)
+  player1 = Player.new("Prout")                                         #creation nouveaux objets Player
+  player2 = Player.new("Pouet")
     while player1.life_points > 0 && player2.life_points > 0              # Tant que les Players ont des PV, la partie continue
       puts ""                                                           
       puts "<3<3<3    Voici l'etat de chaque joueurs    <3<3<3"

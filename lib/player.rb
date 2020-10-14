@@ -1,8 +1,7 @@
 class Player                                          # creation de classe Player (CPU)
   attr_accessor :name, :life_points
   def initialize(name)                                # Methode qui definis les caracteristiques des objets Player  
-    $name_cpu = ["prout", "pouet", "Francise", "Macron", "Superman", "Guts", "Florian", "Ugo", "Killian", "Johnathan", "David", "Jean-Marc", "Guillemette XD", "Sindy", "Moncul", "Sur la Commode", "Fhelix le mou", "Rose", "Jiiha", "Robert"]
-    @name = $name_cpu.sample                          # L'array sert de reserve de noms pour les I.A.
+    @name = name                       
     @life_points = 10
   end
 
