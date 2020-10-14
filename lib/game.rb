@@ -60,6 +60,7 @@ puts "#~> s - chercher à se soigner (pas sûr que tu trouve ^^)"
 puts "   >>>>>>> ATTAQUE <<<<<<<"
 puts "attaquer un joueur en vue :"
 puts ""
+
 if @player1.life_points > 0
 puts "#=> 1 "
 puts @player1.show_state
