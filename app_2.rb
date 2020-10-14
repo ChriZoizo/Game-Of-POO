@@ -40,7 +40,7 @@ puts ""
           banner "LOADING..."
           type :spinner
           action do
-          sleep 1
+          sleep 3
   end
           message "LOADED !"
   end
